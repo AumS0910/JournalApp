@@ -8,14 +8,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.example.journalapp.service.UserService.log;
-
 @Service
 @Slf4j
 public class RedisService {
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     public <T> T get(String key, Class<T> entityClass) {
         try {

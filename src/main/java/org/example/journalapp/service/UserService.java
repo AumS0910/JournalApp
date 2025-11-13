@@ -22,7 +22,6 @@ import java.util.Optional;
 @Slf4j
 public class UserService {
 
-    public static final Logger log = LoggerFactory.getLogger(UserService.class);
     @Autowired
     private UserRepository userRepository;
 
