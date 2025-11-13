@@ -12,16 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Service
 @Slf4j
 public class UserService {
 
-    private static final Logger log = LoggerFactory.getLogger(UserService.class);
+    public static final Logger log = LoggerFactory.getLogger(UserService.class);
     @Autowired
     private UserRepository userRepository;
 

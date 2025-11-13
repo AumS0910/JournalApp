@@ -1,14 +1,52 @@
 spring:
+  redis:
+    uri: ${REDIS_URI}
   data:
     mongodb:
-      uri: mongodb+srv://user1:iXNMdMhvJdjkb55g@cluster0.zfqkw.mongodb.net/journaldb
-      database: journaldb
+      uri: ${MONGODB_URI}
+      database: ${MONGODB_DATABASE}
       auto-index-creation: true
-
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   main:
     allow-circular-references: true
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP}
+    properties:
+      security.protocol: SASL_SSL
+      sasl.mechanism: PLAIN
+      sasl.jaas.config: >
+        org.apache.kafka.common.security.plain.PlainLoginModule required
+        username='${KAFKA_USERNAME}'
+        password='${KAFKA_PASSWORD}';
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: weekly-sentiment-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: org.example.journalapp.model
+
+client:
+  id: ${CLIENT_ID}
 
 server:
   port: 8080
   servlet:
     context-path: /journal
+
+weather:
+  api:
+    key: ${WEATHER_API_KEY}
